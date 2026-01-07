@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Balita {
+  id          Int           @id @default(autoincrement())
+  nik         String        @unique
+  name        String
+  dob         DateTime
+  gender      String
+  parentName  String
+  pemeriksaan Pemeriksaan[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Pemeriksaan {
+  id              Int      @id @default(autoincrement())
+  balitaId        Int
+  balita          Balita   @relation(fields: [balitaId], references: [id])
+  date            DateTime @default(now())
+  weight          Float
+  height          Float
+  zScoreWeight    Float?
+  zScoreHeight    Float?
+  nutritionStatus String // Using string to store JSON or plain string status
+  createdAt       DateTime @default(now())
+}
