@@ -4,16 +4,16 @@ import { Client } from "@gradio/client";
 async function testApi() {
   try {
     console.log("Connecting to Gradio API...");
-    const client = await Client.connect("https://gizi.ezii.my.id/");
-    
+    const client = await Client.connect("http://127.0.0.1:58906");
+
     console.log("Calling analyze_gizi...");
-    const result = await client.predict("/analyze_gizi", { 		
-        nama: "Budi Test", 
-        dob_str: "2024-01-06", 
-        gender: "Laki-laki", 
-        weight: 12.2, 
-        height: 87.1, 
-        measure_mode: "Berdiri", 
+    const result = await client.predict("/analyze_gizi", {
+      nama: "Budi Test",
+      dob_str: "2024-01-06",
+      gender: "Laki-laki",
+      weight: 12.2,
+      height: 87.1,
+      measure_mode: "Berdiri",
     });
 
     console.log("API Result Data:");
